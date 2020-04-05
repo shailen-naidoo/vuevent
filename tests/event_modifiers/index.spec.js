@@ -79,7 +79,6 @@ describe('Test Event Modifiers', () => {
 
     const windowListeners = {
       keydown(e) {
-        e.preventDefault()
         vmRef = this
       }
     }
@@ -104,7 +103,6 @@ describe('Test Event Modifiers', () => {
     window.dispatchEvent(keydownEvent)
 
     expect(keydownSpy).toHaveBeenCalledTimes(2)
-    expect(keydownEvent.defaultPrevented).toBe(false)
     expect(vm._uid).toBe(vmRef._uid)
 
     vm.$destroy()
