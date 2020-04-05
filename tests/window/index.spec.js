@@ -1,11 +1,11 @@
 import { createLocalVue } from '@vue/test-utils'
-import { VueventPlugin } from '../../src/plugin'
+import { Vuevent } from '../../src/plugin'
 
 const LocalVue = createLocalVue()
 
 LocalVue.config.silent = true
 
-LocalVue.use(VueventPlugin)
+LocalVue.use(Vuevent)
 
 describe('Test window events', () => {
   test('Dummy test', () => {
