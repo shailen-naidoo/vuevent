@@ -1,5 +1,5 @@
 <template>
-  <p>Hello World</p>
+  <p>Hello Mouseover event - Check your console - It works for 5 second afetr reload</p>
 </template>
 
 <script>
