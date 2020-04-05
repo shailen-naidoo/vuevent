@@ -15,7 +15,7 @@ sidebar: true
 #### Via CDN
 
 ```html
-<script src="https://unpkg.com/vueventjs@1.0.5/dist/vuevent.min.js"></script>
+<script src="https://unpkg.com/vueventjs@1.1.0/dist/vuevent.min.js"></script>
 ```
 
 The plugin will automatically register itself using `Vue.use()`
