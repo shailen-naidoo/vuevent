@@ -1,8 +1,43 @@
-function createGlobalEvents(targetName, target, events) {
-  Object.entries(events).forEach(([event, handler]) => {
-    const newHandler = handler.bind(this)
+const modifiersMap = new Map([
+  ['prevent', (e) => e.preventDefault()],
+  ['stop', (e) => e.stopPropagation()],
+])
 
-    target.addEventListener(event, newHandler)
+function createGlobalEvents(targetName, target, events) {
+  const vm = this
+
+  Object.entries(events).forEach(([event, handler]) => {
+    const [eventName, ...modifiers] = event.split('.')
+
+    const newHandler = function newHandler(e, ...args) {
+      modifiers.forEach((modifier) => {
+        const fn = modifiersMap.get(modifier)
+
+        if (fn) {
+          fn(e, target, eventName, newHandler)
+        }
+      })
+
+      handler.apply(vm, [e, ...args])
+    }
+
+    const options = {}
+
+    modifiers.forEach((modifier) => {
+      switch (modifier) {
+        case 'once':
+          options.once = true
+          break;
+        case 'passive':
+          options.passive = true
+          break;
+        case 'capture':
+          options.capture = true
+          break;
+      }
+    })
+
+    target.addEventListener(eventName, newHandler, options)
 
     this.$events = {
       ...this.$events,
@@ -10,7 +45,7 @@ function createGlobalEvents(targetName, target, events) {
         ...this.$events.remove,
         [targetName]: {
           ...this.$events[targetName],
-          [event]: () => target.removeEventListener(event, newHandler),
+          [eventName]: () => target.removeEventListener(eventName, newHandler),
         },
       },
     }

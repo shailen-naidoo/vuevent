@@ -32,8 +32,9 @@ describe('Test document events', () => {
     })
 
     document.dispatchEvent(new MouseEvent('click'))
+    document.dispatchEvent(new MouseEvent('click'))
 
-    expect(clickSpy).toHaveBeenCalledTimes(1)
+    expect(clickSpy).toHaveBeenCalledTimes(2)
     expect(vm._uid).toBe(vmRef._uid)
   })
 })

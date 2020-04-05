@@ -1,3 +1,7 @@
+---
+sidebar: true
+---
+
 # Vuevent
 
 🔥 A nifty way of handling global events in Vue components. Under *3kb* in size!
@@ -121,3 +125,27 @@ export default {
 :::tip
 Vuevent automatically removes all listeners that we registered in a component when the component is destroyed
 :::
+
+### Modifiers <Badge text="+v1.1.0" />
+
+Just like you can do on HTML tags in Vue, you can now use [Event Modifiers](https://vuejs.org/v2/guide/events.html#Event-Modifiers) with Vuevent. Here are the list of supported modifiers:
+
+* `.once`
+* `.passive`
+* `.capture`
+* `.prevent`
+* `.stop`
+
+```vue
+<script>
+export default {
+  events: {
+    document: {
+      'click.once'(e) {
+        // This event listener is only called once
+      },
+    },
+  },
+}
+</script>
+```

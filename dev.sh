@@ -16,7 +16,7 @@ echo ""
 echo "netlify_pipeline          Runs the necessary commands for the deployment of the documentation on Netlify"
 
 function serve_docs {
-  pnpx vuepress dev docs
+  pnpx vuepress dev
 }
 
 function build_docs {
