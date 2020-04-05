@@ -40,6 +40,40 @@ describe('Test Event Modifiers', () => {
     vm.$destroy()
   })
 
+  test('Check if [ capture ] modifier works', () => {
+    let vmRef = null
+
+    const windowListeners = {
+      keydown(e) {
+        vmRef = this
+      }
+    }
+  
+    const keydownSpy = jest.spyOn(windowListeners, 'keydown')
+  
+    document.body.innerHTML = `<div id="app"></div>`
+
+    const vm = new LocalVue({
+      el: '#app',
+      render: (h) => (<span ref="mock">Hello World</span>),
+      events: {
+        window: {
+          'keydown.capture': windowListeners.keydown
+        }
+      },
+      mounted() {
+        this.$refs.mock.addEventListener('keydown', () => {})
+
+        this.$refs.mock.dispatchEvent(new KeyboardEvent('keydown'))
+      }
+    })
+
+    expect(keydownSpy).toHaveBeenCalledTimes(1)
+    expect(vm._uid).toBe(vmRef._uid)
+
+    vm.$destroy()
+  })
+
   test('Check if [ prevent ] modifier works', () => {
     let vmRef = null
 
