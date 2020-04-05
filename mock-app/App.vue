@@ -9,12 +9,17 @@ export default {
       mouseover() {
         console.log('Mouseover!')
       }
+    },
+    window: {
+      'click'(e) {
+        console.log(e)
+      }
     }
   },
-  mounted() {
-    setTimeout(() => {
-      this.$events.remove.document.mouseover()
-    }, 5000)
-  }
+  // mounted() {
+  //   setTimeout(() => {
+  //     this.$events.remove.document.mouseover()
+  //   }, 5000)
+  // }
 }
 </script>
