@@ -74,6 +74,42 @@ describe('Test Event Modifiers', () => {
     vm.$destroy()
   })
 
+  test('Check if [ passive ] modifier works', () => {
+    let vmRef = null
+
+    const windowListeners = {
+      keydown(e) {
+        e.preventDefault()
+        vmRef = this
+      }
+    }
+  
+    const keydownSpy = jest.spyOn(windowListeners, 'keydown')
+  
+    document.body.innerHTML = `<div id="app"></div>`
+
+    const vm = new LocalVue({
+      el: '#app',
+      render: (h) => (<span>Hello World</span>),
+      events: {
+        window: {
+          'keydown.passive': windowListeners.keydown
+        }
+      },
+    })
+
+    const keydownEvent = new KeyboardEvent('keydown')
+
+    window.dispatchEvent(keydownEvent)
+    window.dispatchEvent(keydownEvent)
+
+    expect(keydownSpy).toHaveBeenCalledTimes(2)
+    expect(keydownEvent.defaultPrevented).toBe(false)
+    expect(vm._uid).toBe(vmRef._uid)
+
+    vm.$destroy()
+  })
+
   test('Check if [ prevent ] modifier works', () => {
     let vmRef = null
 
