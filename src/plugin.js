@@ -10,16 +10,16 @@ function createGlobalEvents(targetName, target, events) {
         ...this.$events.remove,
         [targetName]: {
           ...this.$events[targetName],
-          [event]: () => target.removeEventListener(event, newHandler)
-        }
-      }
+          [event]: () => target.removeEventListener(event, newHandler),
+        },
+      },
     }
-    
+
     this.$options.destroyed = [
       ...this.$options.destroyed,
       () => {
-         Object.values(this.$events.remove[targetName]).forEach((cb) => cb())
-      }
+        Object.values(this.$events.remove[targetName]).forEach((cb) => cb())
+      },
     ]
   })
 }
@@ -30,27 +30,27 @@ const Vuevent = {
       beforeCreate() {
         const vm = this
 
-        const { events = {} } = this.$options
+        const { events = {} } = vm.$options
         const { document: documentEvents = {}, window: windowEvents = {} } = events
-        
-         if (!this.$events) {
-            this.$events = {
-              remove: {
-                window: {},
-                document: {}
-              }
-            }
+
+        if (!vm.$events) {
+          vm.$events = {
+            remove: {
+              window: {},
+              document: {},
+            },
+          }
         }
-        
-        if (!this.$options.destroyed) {
-          this.$options.destroyed = []
+
+        if (!vm.$options.destroyed) {
+          vm.$options.destroyed = []
         }
-        
-        createGlobalEvents.apply(this, ['window', window, windowEvents])
-        createGlobalEvents.apply(this, ['document', document, documentEvents])
+
+        createGlobalEvents.apply(vm, ['window', window, windowEvents])
+        createGlobalEvents.apply(vm, ['document', document, documentEvents])
       },
     })
-  }
+  },
 }
 
 export { Vuevent }

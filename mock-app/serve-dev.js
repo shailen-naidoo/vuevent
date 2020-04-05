@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue'
 
-import { Vuevent } from './plugin'
+import { Vuevent } from '../src/plugin'
 
 Vue.config.productionTip = false;
 
