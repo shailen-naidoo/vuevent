@@ -1,6 +1,7 @@
 const modifiersMap = new Map([
   ['once', (e, target, eventName, newHandler) => target.removeEventListener(eventName, newHandler)],
   ['prevent', (e) => e.preventDefault()],
+  ['stop', (e) => e.stopPropagation()],
 ])
 
 function createGlobalEvents(targetName, target, events) {

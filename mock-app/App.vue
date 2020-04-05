@@ -6,7 +6,7 @@
 export default {
   events: {
     document: {
-      mouseover() {
+      'mouseover.once'() {
         console.log('Mouseover!')
       }
     },
@@ -16,10 +16,5 @@ export default {
       }
     }
   },
-  // mounted() {
-  //   setTimeout(() => {
-  //     this.$events.remove.document.mouseover()
-  //   }, 5000)
-  // }
 }
 </script>

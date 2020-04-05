@@ -39,36 +39,4 @@ describe('Test window events', () => {
 
     vm.$destroy()
   })
-
-  test('Check if [ once ] modifier works', () => {
-    let vmRef = null
-
-    const windowListeners = {
-      keydown(e) {
-        vmRef = this
-      }
-    }
-  
-    const keydownSpy = jest.spyOn(windowListeners, 'keydown')
-  
-    document.body.innerHTML = `<div id="app"></div>`
-
-    const vm = new LocalVue({
-      el: '#app',
-      render: (h) => (<span>Hello World</span>),
-      events: {
-        window: {
-          'keydown.once': windowListeners.keydown
-        }
-      }
-    })
-
-    window.dispatchEvent(new KeyboardEvent('keydown'))
-    window.dispatchEvent(new KeyboardEvent('keydown'))
-
-    expect(keydownSpy).toHaveBeenCalledTimes(1)
-    expect(vm._uid).toBe(vmRef._uid)
-
-    vm.$destroy()
-  })
 })
