@@ -8,6 +8,7 @@ sidebar: true
 
 ![](https://img.shields.io/npm/v/vueventjs)
 ![](https://img.shields.io/npm/dw/vueventjs)
+[![codecov](https://codecov.io/gh/ShailenNaidoo/vuevent/branch/master/graph/badge.svg)](https://codecov.io/gh/ShailenNaidoo/vuevent)
 ![](https://img.shields.io/github/issues/ShailenNaidoo/vuevent)
 
 ## Installation
