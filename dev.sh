@@ -20,9 +20,7 @@ function serve_docs {
 }
 
 function build_docs {
-  cd docs/
   pnpx vuepress build
-  cd ..
 }
 
 function build_package {
