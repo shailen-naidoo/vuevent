@@ -25,7 +25,8 @@ module.exports = {
         'import/prefer-default-export': 'off',
         'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["vm", "ctx"] }],
         'no-restricted-syntax': 'off',
-        'no-underscore-dangle': ["error", { "allow": ["_uid"] }]
+        'no-underscore-dangle': ["error", { "allow": ["_uid"] }],
+        'default-case': 'off'
     },
     "overrides": [
         {

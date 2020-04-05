@@ -76,4 +76,41 @@ describe('Test Event Modifiers', () => {
 
     vm.$destroy()
   })
+
+  test('Check if [ stop ] modifier works', () => {
+    let vmRef = null
+
+    const windowListeners = {
+      keydown(e) {
+        vmRef = this
+      }
+    }
+  
+    const keydownSpy = jest.spyOn(windowListeners, 'keydown')
+  
+    document.body.innerHTML = `<div id="app"></div>`
+
+    const vm = new LocalVue({
+      el: '#app',
+      render: (h) => (<span>Hello World</span>),
+      events: {
+        window: {
+          'keydown.stop': windowListeners.keydown
+        }
+      }
+    })
+
+    const keydownEvent = new KeyboardEvent('keydown')
+
+    const keydownEventSpy = jest.spyOn(keydownEvent, 'stopPropagation')
+
+    window.dispatchEvent(keydownEvent)
+    window.dispatchEvent(keydownEvent)
+
+    expect(keydownSpy).toHaveBeenCalledTimes(2)
+    expect(keydownEventSpy).toBeCalledTimes(2)
+    expect(vm._uid).toBe(vmRef._uid)
+
+    vm.$destroy()
+  })
 })

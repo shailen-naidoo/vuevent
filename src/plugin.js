@@ -1,5 +1,4 @@
 const modifiersMap = new Map([
-  ['once', (e, target, eventName, newHandler) => target.removeEventListener(eventName, newHandler)],
   ['prevent', (e) => e.preventDefault()],
   ['stop', (e) => e.stopPropagation()],
 ])
@@ -12,13 +11,33 @@ function createGlobalEvents(targetName, target, events) {
 
     const newHandler = function newHandler(e, ...args) {
       modifiers.forEach((modifier) => {
-        modifiersMap.get(modifier)(e, target, eventName, newHandler)
+        const fn = modifiersMap.get(modifier)
+
+        if (fn) {
+          fn(e, target, eventName, newHandler)
+        }
       })
 
       handler.apply(vm, [e, ...args])
     }
 
-    target.addEventListener(eventName, newHandler)
+    const options = {}
+
+    modifiers.forEach((modifier) => {
+      switch (modifier) {
+        case 'once':
+          options.once = true
+          break;
+        case 'passive':
+          options.passive = true
+          break;
+        case 'capture':
+          options.capture = true
+          break;
+      }
+    })
+
+    target.addEventListener(eventName, newHandler, options)
 
     this.$events = {
       ...this.$events,
