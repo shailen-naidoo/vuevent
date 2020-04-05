@@ -6,6 +6,7 @@ devDependencies:
   '@rollup/plugin-alias': 2.2.0_rollup@1.32.1
   '@rollup/plugin-commonjs': 11.0.2_rollup@1.32.1
   '@rollup/plugin-replace': 2.3.1_rollup@1.32.1
+  '@types/jest': 25.2.1
   '@vue/cli-plugin-babel': 4.3.0_@vue+cli-service@4.3.0
   '@vue/cli-service': 4.3.0_2db81305f685615021e23954a95d666c
   '@vue/test-utils': 1.0.0-beta.32_d81dac297579cfd5597855dabf60f13b
@@ -1351,6 +1352,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-UpYjBi8xefVChsCoBpKShdxTllC9pwISirfoZsUa2AAdQg/Jd2KQGtSbw+ya7GPo7x/wAPlH6JBhKhAsXUEZNA==
+  /@types/jest/25.2.1:
+    dependencies:
+      jest-diff: 25.2.6
+      pretty-format: 25.2.6
+    dev: true
+    resolution:
+      integrity: sha512-msra1bCaAeEdkSyA0CZ6gW1ukMIvZ5YoJkdXw/qhQdsuuDlFTcEUrUw8CLCPt2rVRUfXlClVvK2gvPs9IokZaA==
   /@types/json-schema/7.0.4:
     dev: true
     resolution:
@@ -12877,6 +12885,7 @@ specifiers:
   '@rollup/plugin-alias': ^2.2.0
   '@rollup/plugin-commonjs': ^11.0.2
   '@rollup/plugin-replace': ^2.3.1
+  '@types/jest': ^25.2.1
   '@vue/cli-plugin-babel': ^4.3.0
   '@vue/cli-service': ^4.3.0
   '@vue/test-utils': ^1.0.0-beta.32
